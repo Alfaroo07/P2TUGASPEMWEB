@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuliner Nusantara — Warisan Rasa Indonesia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #fdf6ec;
+      --brown-dark: #2c1a0e;
+      --brown-mid: #7a4419;
+      --brown-light: #c47c3e;
+      --gold: #d4a853;
+      --red: #b83a1b;
+      --text: #3b2010;
+      --muted: #8a6045;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--brown-dark);
+      color: var(--cream);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,.4);
+    }
+
+    header .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+    }
+
+    header .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      color: var(--gold);
+    }
+
+    header .logo span { font-style: italic; color: var(--cream); }
+
+    /* ── NAV ── */
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+
+    nav ul li a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: .5px;
+      opacity: .85;
+      transition: opacity .2s, color .2s;
+    }
+
+    nav ul li a:hover { opacity: 1; color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-mid) 100%);
+      color: var(--cream);
+      text-align: center;
+      padding: 100px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4a853' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 em { color: var(--gold); font-style: italic; }
+
+    .hero p {
+      max-width: 560px;
+      margin: 0 auto 32px;
+      opacity: .8;
+      font-size: 1.05rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--brown-dark);
+      font-weight: 600;
+      font-size: .78rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 40px;
+      margin-bottom: 20px;
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--brown-mid);
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: 36px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+
+    /* ── ARTICLE GRID ── */
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      margin-bottom: 64px;
+    }
+
+    article {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(44,26,14,.08);
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    article:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(44,26,14,.15);
+    }
+
+    .article-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, var(--brown-light), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .article-body {
+      padding: 20px 24px 24px;
+    }
+
+    article h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--brown-dark);
+      margin-bottom: 8px;
+    }
+
+    article p { font-size: .93rem; color: var(--muted); }
+
+    .tag {
+      display: inline-block;
+      background: #fdf1e0;
+      color: var(--brown-mid);
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      border: 1px solid #f0d9b5;
+    }
+
+    /* ── ASIDE ── */
+    .content-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 40px;
+      margin-bottom: 64px;
+    }
+
+    @media (max-width: 768px) {
+      .content-layout { grid-template-columns: 1fr; }
+    }
+
+    .main-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--brown-dark);
+      margin-bottom: 12px;
+    }
+
+    .main-content p { margin-bottom: 14px; color: var(--text); }
+
+    .main-content figure {
+      margin: 24px 0;
+      border-left: 4px solid var(--gold);
+      padding-left: 16px;
+    }
+
+    .main-content blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--brown-mid);
+      line-height: 1.6;
+    }
+
+    .main-content figcaption {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    aside {
+      background: var(--brown-dark);
+      color: var(--cream);
+      border-radius: 12px;
+      padding: 28px;
+      height: fit-content;
+    }
+
+    aside h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    aside ul {
+      list-style: none;
+    }
+
+    aside ul li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      font-size: .9rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    aside ul li:last-child { border-bottom: none; }
+
+    aside ul li::before {
+      content: '▸';
+      color: var(--gold);
+      font-size: .8rem;
+    }
+
+    /* ── TABLE SECTION ── */
+    section.table-section { margin-bottom: 64px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(44,26,14,.08);
+    }
+
+    thead { background: var(--brown-dark); color: var(--cream); }
+
+    thead th {
+      padding: 16px 20px;
+      font-size: .85rem;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-align: left;
+    }
+
+    tbody tr { border-bottom: 1px solid #f3e8d8; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #fdf1e0; }
+
+    tbody td {
+      padding: 14px 20px;
+      font-size: .92rem;
+      color: var(--text);
+    }
+
+    .dot {
+      display: inline-block;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .dot-hot { background: var(--red); }
+    .dot-mild { background: var(--gold); }
+    .dot-sweet { background: #6daf5c; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown-dark);
+      color: var(--cream);
+      padding: 48px 24px 28px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 36px;
+      margin-bottom: 36px;
+    }
+
+    footer h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      margin-bottom: 14px;
+      font-size: 1.05rem;
+    }
+
+    footer p, footer a {
+      color: rgba(253,246,236,.65);
+      font-size: .88rem;
+      text-decoration: none;
+      line-height: 2;
+    }
+
+    footer a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p { font-size: .8rem; color: rgba(253,246,236,.4); }
+
+    address { font-style: normal; }
+
+    /* ── SEMANTIC LABELS (for educational clarity) ── */
+    .sem-label {
+      display: inline-block;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(212,168,83,.2);
+      color: var(--gold);
+      border: 1px solid rgba(212,168,83,.3);
+      vertical-align: middle;
+      margin-left: 6px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">Kuliner <span>Nusantara</span></div>
+      <nav aria-label="Navigasi Utama">
+        <ul>
+          <li><a href="#makanan">Makanan</a></li>
+          <li><a href="#budaya">Budaya</a></li>
+          <li><a href="#daftar">Daftar</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════ HERO / BANNER ═══════════════════════════ -->
+  <section class="hero" aria-label="Hero Banner">
+    <span class="hero-badge">🇮🇩 Warisan Budaya Bangsa</span>
+    <h1>Cita Rasa <em>Nusantara</em><br>yang Tak Terlupakan</h1>
+    <p>Menjelajahi kekayaan kuliner Indonesia, dari Sabang sampai Merauke — setiap hidangan adalah sebuah cerita.</p>
+  </section>
+
+  <!-- ═══════════════════════════ MAIN CONTENT ═══════════════════════════ -->
+  <main>
+
+    <!-- ── SECTION: ARTIKEL MAKANAN ── -->
+    <section id="makanan" aria-labelledby="judul-makanan">
+      <h2 class="section-title" id="judul-makanan">Makanan Populer <span class="sem-label">&lt;section&gt;</span></h2>
+      <p class="section-subtitle">Hidangan ikonik yang dikenal hingga mancanegara</p>
+
+      <div class="article-grid">
+
+        <article aria-label="Rendang">
+          <div class="article-img">🍛</div>
+          <div class="article-body">
+            <span class="tag">Sumatera Barat</span>
+            <h2>Rendang</h2>
+            <p>Daging sapi yang dimasak perlahan dalam santan dan rempah-rempah selama berjam-jam hingga kering dan penuh rasa. Dinobatkan sebagai makanan terlezat di dunia.</p>
+          </div>
+        </article>
+
+        <article aria-label="Soto Betawi">
+          <div class="article-img">🍲</div>
+          <div class="article-body">
+            <span class="tag">Jakarta</span>
+            <h2>Soto Betawi</h2>
+            <p>Sup daging sapi kaya santan dengan irisan tomat, kentang goreng, dan emping — sajian khas ibu kota yang menghangatkan jiwa.</p>
+          </div>
+        </article>
+
+        <article aria-label="Gudeg">
+          <div class="article-img">🌿</div>
+          <div class="article-body">
+            <span class="tag">Yogyakarta</span>
+            <h2>Gudeg</h2>
+            <p>Nangka muda yang dimasak dengan gula merah dan santan hingga berwarna kecokelatan. Cita rasa manis yang menjadi ciri khas masakan Jawa.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── SECTION: KONTEN UTAMA + ASIDE ── -->
+    <section id="budaya" aria-labelledby="judul-budaya">
+      <h2 class="section-title" id="judul-budaya">Budaya & Filosofi <span class="sem-label">&lt;section&gt;</span></h2>
+      <p class="section-subtitle">Makanan sebagai identitas dan pemersatu bangsa</p>
+
+      <div class="content-layout">
+
+        <!-- ARTICLE: Konten panjang -->
+        <article class="main-content" aria-label="Artikel utama tentang kuliner">
+          <h2>Makanan adalah Bahasa Budaya <span class="sem-label">&lt;article&gt;</span></h2>
+          <p>
+            Indonesia adalah surga kuliner dengan lebih dari 5.350 resep tradisional yang tersebar di 34 provinsi. Setiap daerah memiliki bumbu, teknik, dan filosofi memasak yang unik — mencerminkan sejarah, alam, dan karakter masyarakatnya.
+          </p>
+          <p>
+            Kekayaan kuliner Indonesia tidak lepas dari posisi strategisnya sebagai jalur perdagangan rempah-rempah dunia selama berabad-abad. Pengaruh India, Arab, Tionghoa, Portugis, dan Belanda memperkaya cita rasa lokal tanpa menghilangkan identitas aslinya.
+          </p>
+
+          <figure>
+            <blockquote>
+              "Masakan Indonesia bukan sekadar makanan — ia adalah doa, tradisi, dan kasih sayang yang diwariskan turun-temurun."
+            </blockquote>
+            <figcaption>— William Wongso, Pakar Kuliner Indonesia</figcaption>
+          </figure>
+
+          <p>
+            Dari pesta adat hingga meja makan keluarga, makanan menjadi jembatan antargenerasi. Rempah seperti kunyit, serai, dan kemiri bukan hanya bumbu — melainkan simbol identitas dan kebanggaan nasional.
+          </p>
+        </article>
+
+        <!-- ASIDE: Informasi tambahan -->
+        <aside aria-label="Fakta Menarik Kuliner">
+          <h3>🌶️ Fakta Menarik <span class="sem-label" style="color:rgba(212,168,83,.6)">&lt;aside&gt;</span></h3>
+          <ul>
+            <li>Indonesia punya 5.350+ resep tradisional</li>
+            <li>Rendang masuk daftar CNN World's 50 Best Foods</li>
+            <li>Tempe ditemukan di Jawa sejak abad ke-16</li>
+            <li>Lebih dari 400 jenis sambal ada di Nusantara</li>
+            <li>Nasi goreng dimakan 100 juta orang per hari</li>
+            <li>Bumbu dapur Indonesia diekspor ke 80+ negara</li>
+          </ul>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ── SECTION: TABEL ── -->
+    <section id="daftar" class="table-section" aria-labelledby="judul-tabel">
+      <h2 class="section-title" id="judul-tabel">Daftar Kuliner per Daerah <span class="sem-label">&lt;section&gt;</span></h2>
+      <p class="section-subtitle">Referensi cepat hidangan khas nusantara</p>
+
+      <table>
+        <caption style="caption-side:top; text-align:left; padding:12px 0; font-size:.85rem; color:var(--muted);">
+          Tabel kuliner berdasarkan asal daerah dan tingkat kepedasan
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Nama Makanan</th>
+            <th scope="col">Asal Daerah</th>
+            <th scope="col">Bahan Utama</th>
+            <th scope="col">Tingkat Rasa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Rendang</strong></td>
+            <td>Sumatera Barat</td>
+            <td>Daging sapi, santan, rempah</td>
+            <td><span class="dot dot-hot"></span> Pedas</td>
+          </tr>
+          <tr>
+            <td><strong>Gudeg</strong></td>
+            <td>Yogyakarta</td>
+            <td>Nangka muda, gula merah</td>
+            <td><span class="dot dot-sweet"></span> Manis</td>
+          </tr>
+          <tr>
+            <td><strong>Papeda</strong></td>
+            <td>Papua</td>
+            <td>Sagu, ikan kuah kuning</td>
+            <td><span class="dot dot-mild"></span> Gurih</td>
+          </tr>
+          <tr>
+            <td><strong>Coto Makassar</strong></td>
+            <td>Sulawesi Selatan</td>
+            <td>Jeroan sapi, 40 rempah</td>
+            <td><span class="dot dot-mild"></span> Gurih</td>
+          </tr>
+          <tr>
+            <td><strong>Pempek</strong></td>
+            <td>Palembang</td>
+            <td>Ikan tenggiri, sagu</td>
+            <td><span class="dot dot-hot"></span> Asam Pedas</td>
+          </tr>
+          <tr>
+            <td><strong>Babi Guling</strong></td>
+            <td>Bali</td>
+            <td>Babi, bumbu Bali</td>
+            <td><span class="dot dot-mild"></span> Gurih</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+  <footer id="kontak" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-grid">
+
+        <div>
+          <h4>Kuliner Nusantara</h4>
+          <p>Portal informasi kuliner tradisional Indonesia yang autentik dan terpercaya.</p>
+        </div>
+
+        <div>
+          <h4>Navigasi</h4>
+          <nav aria-label="Navigasi Footer">
+            <a href="#makanan" style="display:block">Makanan Populer</a>
+            <a href="#budaya" style="display:block">Budaya & Filosofi</a>
+            <a href="#daftar" style="display:block">Daftar Kuliner</a>
+          </nav>
+        </div>
+
+        <div>
+          <h4>Kontak</h4>
+          <address>
+            <a href="mailto:info@kulinernusantara.id">info@kulinernusantara.id</a><br>
+            <a href="tel:+62811234567">+62 811-234-567</a><br>
+            Jakarta, Indonesia 🇮🇩
+          </address>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Kuliner Nusantara. Dibuat dengan ❤️ untuk Tugas Pemrograman Web.</p>
+        <p>Struktur Semantik HTML5 — <code style="color:var(--gold)">header · nav · main · section · article · aside · footer</code></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
